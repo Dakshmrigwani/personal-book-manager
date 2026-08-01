@@ -1,4 +1,5 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/v1';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://personal-book-manager-y5y5.onrender.com'
+//  'http://localhost:5000/v1';
 
 export class ApiError extends Error {
   status: number;
