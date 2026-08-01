@@ -155,7 +155,6 @@ export function BookDashboardUI() {
       setIsDataLoading(false);
     }
   };
-
   useEffect(() => {
     loadDashboardData();
   }, [user, selectedStatus, selectedTag, searchQuery, page]);
@@ -355,6 +354,8 @@ export function BookDashboardUI() {
 
   const startItem = totalResults > 0 ? (page - 1) * limit + 1 : 0;
   const endItem = Math.min(page * limit, totalResults);
+  console.log("books" , books)
+
 
   return (
     <div className="min-h-screen bg-[#fcfaf7] text-[#1a1918] font-sans px-4 py-8 sm:px-8 lg:px-16">
@@ -379,13 +380,14 @@ export function BookDashboardUI() {
             </div>
 
             <DropdownMenu>
-            
+              <DropdownMenuTrigger className="focus:outline-none rounded-full cursor-pointer">
+                <Avatar className="h-10 w-10 border border-[#e2dccb]">
+                  <AvatarFallback className="bg-[#f0ebd9] text-[#1a1918] font-medium">{userInitials}</AvatarFallback>
+                </Avatar>
+              </DropdownMenuTrigger>
 
               <DropdownMenuContent align="end" className="bg-[#f5f1e8] border border-[#e2dccb]">
-                <DropdownMenuItem className="cursor-default">
-                  <UserIcon className="mr-2 h-4 w-4 text-[#78746d]" />
-                  {user?.email}
-                </DropdownMenuItem>
+              
 
                 <DropdownMenuItem
                   className="text-red-500 cursor-pointer focus:bg-red-50 focus:text-red-600"
