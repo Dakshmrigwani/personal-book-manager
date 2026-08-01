@@ -22,12 +22,20 @@ export function setStoredTokens(accessToken: string, refreshToken: string) {
   if (typeof window === 'undefined') return;
   localStorage.setItem('accessToken', accessToken);
   localStorage.setItem('refreshToken', refreshToken);
+
+  // Set cookies so Next.js server-side middleware can inspect incoming requests before rendering
+  document.cookie = `accessToken=${accessToken}; path=/; max-age=1800; SameSite=Lax`;
+  document.cookie = `refreshToken=${refreshToken}; path=/; max-age=2592000; SameSite=Lax`;
 }
 
 export function clearStoredTokens() {
   if (typeof window === 'undefined') return;
   localStorage.removeItem('accessToken');
   localStorage.removeItem('refreshToken');
+
+  // Expire cookies for server-side Next.js middleware
+  document.cookie = 'accessToken=; path=/; max-age=0; SameSite=Lax';
+  document.cookie = 'refreshToken=; path=/; max-age=0; SameSite=Lax';
 }
 
 export async function apiFetch<T = any>(
